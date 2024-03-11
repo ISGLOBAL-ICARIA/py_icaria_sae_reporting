@@ -22,6 +22,7 @@ if __name__ == '__main__':
     PROJECTS = tokens.REDCAP_PROJECTS
 
     for project_key in PROJECTS:
+        print(project_key)
         project = redcap.Project(URL, PROJECTS[project_key])
 
         # Get all SAE records marked as completed (sae_complete = '2')
