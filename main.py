@@ -7,9 +7,9 @@ import pandas
 import redcap
 import tokens
 
-__author__ = "Maximo Ramirez Robles"
-__copyright__ = "Copyright 2021, ISGlobal Maternal, Child and Reproductive Health"
-__credits__ = ["Maximo Ramirez Robles"]
+__author__ = "Maximo Ramirez"
+__copyright__ = "Copyright 2024, ISGlobal Maternal, Child and Reproductive Health"
+__credits__ = ["Maximo Ramirez","Andreu Bofill"]
 __license__ = "MIT"
 __version__ = "0.0.1"
 __date__ = "20210629"
@@ -34,7 +34,6 @@ if __name__ == '__main__':
         )
 
         if not df_sae.empty:
-
             # Get all Study Numbers with a registered SAE
             record_ids = df_sae.index.get_level_values('record_id')
             print("[{}] Getting Study Numbers of SAEs from {}...".format(datetime.now(), project_key))
@@ -53,6 +52,8 @@ if __name__ == '__main__':
             for index, row in df.iterrows():
                 if index != previous_index:
                     previous_sae_number = ''
+
+               # print(index, row['sae_number'])
                 if pandas.isna(row['sae_number']) or "-" not in row['sae_number'].split("ICA-")[1]:
                     if previous_sae_number=='':
                         sae_number = row['study_number'] + "-01"
@@ -73,8 +74,6 @@ if __name__ == '__main__':
                     }
                     print (index)
                     to_import.append(record_dict)
-    #                print(sae_number)
-    #                print(record_dict)
                     previous_sae_number = sae_number
                 else:
                     previous_sae_number = row['sae_number']
